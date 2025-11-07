@@ -1,1 +1,96 @@
+Perfecto 👏 eso significa que el proyecto sí carga, pero **el modelo o la cámara no se está mostrando correctamente**.
+Vamos a resolverlo paso a paso.
+Te explico las **3 causas más comunes** (y su solución exacta).
+
+---
+
+## ⚠️ 1️⃣ Verifica que el modelo esté en la ruta correcta
+
+Asegúrate de que la estructura del repositorio sea **exactamente así** 👇:
+
+```
+AR_SantaClaus/
+├── index.html
+└── models/
+     └── santa.glb
+```
+
+Y dentro del archivo `index.html`, la línea del modelo debe ser **idéntica** a esto:
+
+```html
+<a-entity gltf-model="url(models/santa.glb)" scale="0.5 0.5 0.5" position="0 0 -2"></a-entity>
+```
+
+👉 **Atención:** GitHub distingue mayúsculas y minúsculas.
+Si tu archivo se llama `Santa.glb` o `santa.GLTF`, debes escribirlo igual en el código.
+
+Por ejemplo:
+
+```html
+gltf-model="url(models/Santa.glb)"
+```
+
+---
+
+## ⚠️ 2️⃣ Permisos de cámara
+
+Si abres el enlace en tu **celular**, asegúrate de:
+
+* Usar **Chrome o Edge** (Safari da problemas).
+* Activar los permisos de cámara cuando te los pida.
+* Esperar unos segundos a que aparezca la cámara.
+
+Si te sigue saliendo blanco:
+
+1. Toca la “i” del sitio (🔒 en la barra de dirección).
+2. Asegúrate que **Cámara → Permitir**.
+3. Recarga la página.
+
+---
+
+## ⚠️ 3️⃣ Error en consola (verifica desde PC)
+
+Haz clic derecho en la página → **Inspeccionar → Consola**.
+Si ves un error como:
+
+```
+Failed to load resource: the server responded with a status of 404 (Not Found)
+```
+
+significa que **no encuentra el archivo `santa.glb`** o **la librería no carga**.
+
+En ese caso, revisa:
+
+* Que tengas conexión a internet (usa Wi-Fi).
+* Que el código tenga estas líneas exactamente en el `<head>`:
+
+  ```html
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.2/aframe/build/aframe-ar.js"></script>
+  ```
+
+---
+
+## 🧩 Prueba rápida (sin tu modelo)
+
+Para comprobar si el entorno RA funciona, cambia temporalmente el modelo por una caja 3D.
+Edita tu `index.html` y reemplaza el modelo por esto:
+
+```html
 <a-box position="0 0 -2" color="red" depth="1" height="1" width="1"></a-box>
+```
+
+Guarda → actualiza GitHub → recarga la página.
+
+✅ Si ves una **caja roja flotando sobre el fondo de cámara**,
+el problema está en el **modelo 3D**.
+✅ Si **no ves nada**, el problema está en la **cámara o librería**.
+
+---
+
+Si quieres, puedo revisar el **link de tu GitHub Pages** (por ejemplo
+`https://tuusuario.github.io/AR_SantaClaus/`)
+y te digo exactamente qué falla y cómo arreglarlo.
+
+¿Puedes pegarlo aquí?
+
